@@ -170,7 +170,7 @@ public class FireBoy implements DisplayableSprite {
 
 		boolean colliding = false;
 		for (DisplayableSprite sprite : sprites.getSprites()) {
-			if (sprite instanceof BarrierSprite || sprite instanceof Lava) {
+			if (sprite instanceof BarrierSprite || sprite instanceof Lava || sprite instanceof Door) {
 				if (CollisionDetection.overlaps(this.getMinX() + deltaX, this.getMinY() + deltaY, 
 						this.getMaxX()  + deltaX, this.getMaxY() + deltaY, 
 						sprite.getMinX(),sprite.getMinY(), 

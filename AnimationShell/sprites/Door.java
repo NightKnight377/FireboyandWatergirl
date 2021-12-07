@@ -32,7 +32,7 @@ public class Door implements DisplayableSprite {
 		
 		if (image == null && visible) {
 			try {
-				image = ImageIO.read(new File("res/Barrier.png"));
+				image = ImageIO.read(new File("res/Door.png"));
 			}
 			catch (IOException e) {
 				e.printStackTrace();
