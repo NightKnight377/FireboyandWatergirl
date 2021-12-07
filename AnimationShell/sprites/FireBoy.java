@@ -8,42 +8,47 @@ import javax.imageio.ImageIO;
 public class FireBoy implements DisplayableSprite {
 
 	private static Image image;	
-	private double centerX = 0;
-	private double centerY = 0;
+	private static double centerX = 0;
+	private static double centerY = 0;
 	private double width = 50;
 	private double height = 50;
 	private boolean dispose = false;
 	boolean jumping = false;
 	int timeJumping = 0;
-
-	double velocityX = 0;
-	double velocityY = 0;	
 	
-	private final double VELOCITY = 150;
-
-	public FireBoy(double centerX, double centerY, double height, double width) {
-		this(centerX, centerY);
-		
-		this.height = height;
-		this.width = width;
-	}
+	private double ACCCELERATION_X = 20;		//PIXELS PER SECOND PER SECOND
+	private double ACCCELERATION_Y = 600; 	//PIXELS PER SECOND PER SECOND
+	private double MAX_VELOCITY_X = 150;	//PIXELS PER SECOND
+	private double FRICTION_FACTOR_X = 0.95;
+	private double velocityX = 0;        	//PIXELS PER SECOND
+	private double velocityY = 0;  
+	
+	private boolean isJumping = false;
+	private final double INITIAL_JUMP_VELOCITY = 250; //pixels / second
+	
+	private CollisionDetection collisionDetection;
+	TwoDimensionBounce bounce;
 
 	
 	public FireBoy(double centerX, double centerY) {
 
 		this.centerX = centerX;
 		this.centerY = centerY;
+		collisionDetection = new CollisionDetection();
+		collisionDetection.setBounceFactorX(0.5);
+		collisionDetection.setBounceFactorY(0);
+		bounce = new TwoDimensionBounce();
 		
 		if (image == null) {
 			try {
 				image = ImageIO.read(new File("res/Fireboy.png"));
-				this.height = this.image.getHeight(null);
-				this.width = this.image.getWidth(null);
 			}
 			catch (IOException e) {
-				System.out.println(e.toString());
+				System.err.println(e.toString());
 			}		
-		}		
+		}
+		this.height = 60;
+		this.width = 30;	
 	}
 
 	public Image getImage() {
@@ -110,37 +115,45 @@ public class FireBoy implements DisplayableSprite {
 
 	public void update(Universe universe, KeyboardInput keyboard, long actual_delta_time) {
 		
-		double velocityX = 0;
-		double velocityY = 0;
+		boolean onGround = isOnGround(universe);
 		
-		if (jumping == true) {
-			if (timeJumping <= 30) {
-				velocityY = -VELOCITY;
-				timeJumping++;
+		if (onGround) {
+
+			if (keyboard.keyDown(38)) {
+				isJumping = true;
+				this.velocityY -= INITIAL_JUMP_VELOCITY;
+				onGround = false;
 			} else {
-				timeJumping = 0;
-				jumping = false;
+				this.velocityX = this.velocityX * FRICTION_FACTOR_X;
 			}
 		} else {
-			// DOWN
-			velocityY += 200;
-		}
-		
-		//LEFT	
-		if (keyboard.keyDown(37)) {
-			velocityX = -VELOCITY;
+			
 		}
 		// RIGHT
 		if (keyboard.keyDown(39)) {
-			velocityX += VELOCITY;
-		}			
-		//UP
-		if (keyboard.keyDown(38)) {
-			double deltaY = actual_delta_time * 0.001 * velocityY;
-			if (checkCollisionWithBarrier(universe, 0, deltaY) == true) {
-				jumping = true;
-				velocityY = -VELOCITY;
-			}			
+			velocityX += + ACCCELERATION_X;
+			if (velocityX > MAX_VELOCITY_X) {
+				velocityX = MAX_VELOCITY_X;
+			}
+		}
+		// LEFT
+		else if (keyboard.keyDown(37)) {
+			velocityX -= ACCCELERATION_X;
+			if (velocityX < - MAX_VELOCITY_X) {
+				velocityX = - MAX_VELOCITY_X;
+			}
+		}
+		
+		collisionDetection.calculate2DBounce(bounce, this, universe.getBarriers(), velocityX, velocityY, actual_delta_time);
+		this.centerX = bounce.newX + (width / 2);
+		this.centerY = bounce.newY + (height / 2);
+		this.velocityX = bounce.newVelocityX;
+		this.velocityY = bounce.newVelocityY;
+		
+		if (onGround == true) {
+			this.velocityY = 0;
+		} else {
+			this.velocityY = this.velocityY + ACCCELERATION_Y * 0.001 * actual_delta_time;
 		}
 		double deltaX = actual_delta_time * 0.001 * velocityX;
 		if (checkCollisionWithBarrier(universe, deltaX, 0) == false) {
@@ -150,14 +163,12 @@ public class FireBoy implements DisplayableSprite {
 		if (checkCollisionWithBarrier(universe, 0, deltaY) == false) {
 			this.centerY += deltaY;
 		}
-		
-		
+
 	}
 	
 	private boolean checkCollisionWithBarrier(Universe sprites, double deltaX, double deltaY) {
 
 		boolean colliding = false;
-//use pixelbased overlaps
 		for (DisplayableSprite sprite : sprites.getSprites()) {
 			if (sprite instanceof BarrierSprite || sprite instanceof Lava) {
 				if (CollisionDetection.overlaps(this.getMinX() + deltaX, this.getMinY() + deltaY, 
@@ -179,11 +190,13 @@ public class FireBoy implements DisplayableSprite {
 		}		
 		return colliding;		
 	}
+
+		
 	
 	private boolean isOnGround(Universe universe) {
 		boolean onGround = false;
 		for (DisplayableSprite sprite: universe.getSprites()) {
-			boolean bottomColiding = (this.getMaxY() + 5) >= (sprite.getMinY()) && (this.getMaxY() + 5)<= sprite.getMinY();
+			boolean bottomColiding = this.getMaxY() >= (sprite.getMinY()) && this.getMaxY() <= sprite.getMinY();
 			boolean withinRange = this.getMaxX() > sprite.getMinX() && this.getMinX() < sprite.getMaxX();
 			if (bottomColiding && withinRange) {
 				onGround = true;

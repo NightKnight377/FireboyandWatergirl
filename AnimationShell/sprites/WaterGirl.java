@@ -24,7 +24,7 @@ public class WaterGirl implements DisplayableSprite {
 	private double velocityY = 0;  
 	
 	private boolean isJumping = false;
-	private final double INITIAL_JUMP_VELOCITY = 400; //pixels / second
+	private final double INITIAL_JUMP_VELOCITY = 250; //pixels / second
 	
 	private CollisionDetection collisionDetection;
 	TwoDimensionBounce bounce;
