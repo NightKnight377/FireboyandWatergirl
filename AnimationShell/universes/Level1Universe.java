@@ -37,7 +37,8 @@ public class Level1Universe implements Universe {
 		//Green
 		barriers.add(new Green(-50, 359, 50, AnimationFrame.SCREEN_HEIGHT / 2, true));
 		//Doors
-		barriers.add(new Door(-400,-500,-400+16,500, true));
+		barriers.add(new Door(-400,250,-400+16,400, true));
+		//Buttons
 		sprites.add(new Button(-150, 350, -100, 359, true));
 		
 		sprites.addAll(barriers);

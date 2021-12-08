@@ -192,6 +192,7 @@ public class WaterGirl implements DisplayableSprite {
 						sprite.getMinX(),sprite.getMinY(), 
 						sprite.getMaxX(), sprite.getMaxY())) {
 					//move door upwards
+					velocityY = 0;
 					System.out.println("moving door");
 					break;
 				}

@@ -8,11 +8,14 @@ public class Door implements DisplayableSprite {
 
 	private static Image image;
 	private boolean visible = true;
-	private double centerX = 0;
+	private static double centerX = 0;
 	private double centerY = 0;
 	private double width = 50;
 	private double height = 50;
 	private boolean dispose = false;
+	private int direction = 0;
+	private static boolean isMoving = false;
+	private double originalY;;
 	
 	public Door() {
 
@@ -44,6 +47,7 @@ public class Door implements DisplayableSprite {
 		this.width = maxX - minX;
 		this.height = maxY - minY;
 		this.visible = visible;
+		originalY = centerY;
 		
 	}
 	
@@ -88,19 +92,35 @@ public class Door implements DisplayableSprite {
 
 	public double getCenterX() {
 		return centerX;
-	};
+	}
 
 	public double getCenterY() {
 		return centerY;
-	};
+	}
 	
+	public static void addCenterX(int value) {
+		centerX += value;
+	}
+
+	public void addCenterY(int value) {
+		centerY += value;
+	}
 	
 	public boolean getDispose() {
 		return dispose;
 	}
+	public static void openDoor(int direction) {
+		this.direction = direction;
+		isMoving = true;
+	}
 
 	public void update(Universe universe, KeyboardInput keyboard, long actual_delta_time) {
-			
+		if (isMoving == true) {
+			centerY += direction;
+		}
+		if (centerY <= originalY -200 && centerY <= originalY) {
+			isMoving = false;			
+		}
 	}
 
 }

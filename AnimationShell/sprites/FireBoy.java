@@ -15,6 +15,7 @@ public class FireBoy implements DisplayableSprite {
 	private boolean dispose = false;
 	boolean jumping = false;
 	int timeJumping = 0;
+	int totalMove = 0;
 	
 	private double ACCCELERATION_X = 20;		//PIXELS PER SECOND PER SECOND
 	private double ACCCELERATION_Y = 600; 	//PIXELS PER SECOND PER SECOND
@@ -191,11 +192,12 @@ public class FireBoy implements DisplayableSprite {
 						this.getMaxX()  + deltaX, this.getMaxY() + deltaY, 
 						sprite.getMinX(),sprite.getMinY(), 
 						sprite.getMaxX(), sprite.getMaxY())) {
-					//move door upwards
+					Door.openDoor(-1);
 					velocityY = 0;
-					System.out.println("moving door");
 					break;
 				}
+			} else {
+				
 			}
 		}		
 		return colliding;		
