@@ -18,8 +18,8 @@ public class Button implements DisplayableSprite {
 
 		if (image == null) {
 			try {
-				image = ImageIO.read(new File("res/Barrier.png"));
-				this.height = this.image.getHeight(null);
+				image = ImageIO.read(new File("res/Button.png"));
+				this.height = this.image.getHeight(null);;
 				this.width = this.image.getWidth(null);
 			}
 			catch (IOException e) {
@@ -32,7 +32,7 @@ public class Button implements DisplayableSprite {
 		
 		if (image == null && visible) {
 			try {
-				image = ImageIO.read(new File("res/Barrier.png"));
+				image = ImageIO.read(new File("res/Button.png"));
 			}
 			catch (IOException e) {
 				e.printStackTrace();

@@ -186,6 +186,15 @@ public class WaterGirl implements DisplayableSprite {
 					Main.frame.getUniverse().reset();
 					break;					
 				}
+			} if (sprite instanceof Button) {
+				if (CollisionDetection.overlaps(this.getMinX() + deltaX, this.getMinY() + deltaY, 
+						this.getMaxX()  + deltaX, this.getMaxY() + deltaY, 
+						sprite.getMinX(),sprite.getMinY(), 
+						sprite.getMaxX(), sprite.getMaxY())) {
+					//move door upwards
+					System.out.println("moving door");
+					break;
+				}
 			}
 		}		
 		return colliding;		
