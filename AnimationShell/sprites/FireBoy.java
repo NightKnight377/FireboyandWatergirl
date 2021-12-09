@@ -167,40 +167,40 @@ public class FireBoy implements DisplayableSprite {
 
 	}
 	
-	private boolean checkCollisionWithBarrier(Universe sprites, double deltaX, double deltaY) {
+	private boolean checkCollisionWithBarrier(Universe universe, double deltaX, double deltaY) {
 
 		boolean colliding = false;
-		for (DisplayableSprite sprite : sprites.getSprites()) {
+		boolean onButton = false;
+		for (DisplayableSprite sprite : universe.getSprites()) {
 			if (sprite instanceof BarrierSprite || sprite instanceof Lava || sprite instanceof Door) {
 				if (CollisionDetection.overlaps(this.getMinX() + deltaX, this.getMinY() + deltaY, 
 						this.getMaxX()  + deltaX, this.getMaxY() + deltaY, 
 						sprite.getMinX(),sprite.getMinY(), 
 						sprite.getMaxX(), sprite.getMaxY())) {
-					colliding = true;
-					break;					
+					colliding = true;					
 				}
 			} if (sprite instanceof Water || sprite instanceof Green) {
 				if (CollisionDetection.overlaps(this.getMinX() + deltaX, this.getMinY() + deltaY, 
 						this.getMaxX()  + deltaX, this.getMaxY() + deltaY, 
 						sprite.getMinX(),sprite.getMinY(), 
 						sprite.getMaxX(), sprite.getMaxY())) {
-					Main.frame.getUniverse().reset();
-					break;					
+					Main.frame.getUniverse().reset();					
 				}
 			} if (sprite instanceof Button) {
 				if (CollisionDetection.overlaps(this.getMinX() + deltaX, this.getMinY() + deltaY, 
 						this.getMaxX()  + deltaX, this.getMaxY() + deltaY, 
 						sprite.getMinX(),sprite.getMinY(), 
 						sprite.getMaxX(), sprite.getMaxY())) {
-					Door.openDoor(-1);
-					velocityY = 0;
-					break;
+					onButton = true;
 				}
-			} else {
-				
 			}
 		}		
-		return colliding;		
+		if (onButton == true) {
+			universe.getDoor().openDoor(-1);
+		} else {
+			universe.getDoor().openDoor(1);
+		}
+		return colliding;
 	}
 
 		

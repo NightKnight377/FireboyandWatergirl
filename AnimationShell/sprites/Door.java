@@ -14,8 +14,7 @@ public class Door implements DisplayableSprite {
 	private double height = 50;
 	private boolean dispose = false;
 	private int direction = 0;
-	private static boolean isMoving = false;
-	private double originalY;;
+	private double originalY = 0;
 	
 	public Door() {
 
@@ -98,29 +97,26 @@ public class Door implements DisplayableSprite {
 		return centerY;
 	}
 	
-	public static void addCenterX(int value) {
-		centerX += value;
-	}
-
-	public void addCenterY(int value) {
-		centerY += value;
-	}
-	
 	public boolean getDispose() {
 		return dispose;
 	}
-	public static void openDoor(int direction) {
-		this.direction = direction;
-		isMoving = true;
+	public void openDoor(int direction1) {
+		direction = direction1;
 	}
 
 	public void update(Universe universe, KeyboardInput keyboard, long actual_delta_time) {
-		if (isMoving == true) {
-			centerY += direction;
+		if (centerY < originalY - 200) {
+			direction = 0;
+			System.out.println("too high");
 		}
-		if (centerY <= originalY -200 && centerY <= originalY) {
-			isMoving = false;			
+		if (centerY > originalY) {
+			direction = 0;
+			System.out.println("too low");
+			System.out.println(centerY);
+			System.out.println(originalY);
 		}
+		System.out.println("made it");
+		centerY += direction;
 	}
 
 }

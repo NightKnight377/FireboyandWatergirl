@@ -8,6 +8,7 @@ public class Level1Universe implements Universe {
 	private DisplayableSprite player2 = null;
 	private ArrayList<DisplayableSprite> sprites = new ArrayList<DisplayableSprite>();
 	private ArrayList<DisplayableSprite> barriers = new ArrayList<DisplayableSprite>();
+	private Door door;
 
 	public Level1Universe () {
 
@@ -37,7 +38,8 @@ public class Level1Universe implements Universe {
 		//Green
 		barriers.add(new Green(-50, 359, 50, AnimationFrame.SCREEN_HEIGHT / 2, true));
 		//Doors
-		barriers.add(new Door(-400,250,-400+16,400, true));
+		door = new Door(-400,250,-400+16,400, true);
+		barriers.add(door);
 		//Buttons
 		sprites.add(new Button(-150, 350, -100, 359, true));
 		
@@ -123,6 +125,10 @@ public class Level1Universe implements Universe {
 		((WaterGirl) player2).setCenterY(0);
 		((WaterGirl) player2).setVelocityY(0);
 		((WaterGirl) player2).setVelocityX(0);
-	}	
+	}
+	
+	public Door getDoor() {
+		return door;
+	}
 
 }
