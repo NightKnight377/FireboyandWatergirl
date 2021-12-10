@@ -42,6 +42,7 @@ public class Level1Universe implements Universe {
 		barriers.add(door);
 		//Buttons
 		sprites.add(new Button(-150, 350, -100, 359, true));
+		sprites.add(new Button(100, 350, 150, 359, true));
 		
 		sprites.addAll(barriers);
 
