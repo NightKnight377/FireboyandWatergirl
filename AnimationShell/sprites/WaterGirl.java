@@ -166,17 +166,18 @@ public class WaterGirl implements DisplayableSprite {
 
 	}
 	
-	private boolean checkCollisionWithBarrier(Universe sprites, double deltaX, double deltaY) {
+	private boolean checkCollisionWithBarrier(Universe universe, double deltaX, double deltaY) {
 
 		boolean colliding = false;
-		for (DisplayableSprite sprite : sprites.getSprites()) {
+		boolean onButton = false;
+		for (DisplayableSprite sprite : universe.getSprites()) {
 			if (sprite instanceof BarrierSprite || sprite instanceof Water || sprite instanceof Door) {
 				if (CollisionDetection.overlaps(this.getMinX() + deltaX, this.getMinY() + deltaY, 
 						this.getMaxX()  + deltaX, this.getMaxY() + deltaY, 
 						sprite.getMinX(),sprite.getMinY(), 
 						sprite.getMaxX(), sprite.getMaxY())) {
 					colliding = true;
-					break;					
+					break;
 				}
 			} if (sprite instanceof Lava || sprite instanceof Green) {
 				if (CollisionDetection.overlaps(this.getMinX() + deltaX, this.getMinY() + deltaY, 
@@ -184,20 +185,19 @@ public class WaterGirl implements DisplayableSprite {
 						sprite.getMinX(),sprite.getMinY(), 
 						sprite.getMaxX(), sprite.getMaxY())) {
 					Main.frame.getUniverse().reset();
-					break;					
 				}
 			} if (sprite instanceof Button) {
 				if (CollisionDetection.overlaps(this.getMinX() + deltaX, this.getMinY() + deltaY, 
 						this.getMaxX()  + deltaX, this.getMaxY() + deltaY, 
 						sprite.getMinX(),sprite.getMinY(), 
 						sprite.getMaxX(), sprite.getMaxY())) {
-					//move door upwards
-					velocityY = 0;
-					System.out.println("moving door");
-					break;
+					onButton = true;
 				}
 			}
-		}		
+		}
+		if (onButton == true) {
+			universe.getDoor().openDoor(-1);
+		}
 		return colliding;		
 	}
 

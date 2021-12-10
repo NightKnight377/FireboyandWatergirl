@@ -105,18 +105,13 @@ public class Door implements DisplayableSprite {
 	}
 
 	public void update(Universe universe, KeyboardInput keyboard, long actual_delta_time) {
-		if (centerY < originalY - 200) {
-			direction = 0;
-			System.out.println("too high");
+		if (centerY < originalY && centerY > originalY - 200) {
+			centerY += direction;
+		} else if (direction == 1 && centerY <= originalY - 200) {
+			centerY += direction;
+		} else if (direction == -1 && centerY >= originalY) {
+			centerY += direction;
 		}
-		if (centerY > originalY) {
-			direction = 0;
-			System.out.println("too low");
-			System.out.println(centerY);
-			System.out.println(originalY);
-		}
-		System.out.println("made it");
-		centerY += direction;
 	}
 
 }

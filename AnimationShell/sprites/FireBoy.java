@@ -22,7 +22,7 @@ public class FireBoy implements DisplayableSprite {
 	private double MAX_VELOCITY_X = 150;	//PIXELS PER SECOND
 	private double FRICTION_FACTOR_X = 0.95;
 	private double velocityX = 0;        	//PIXELS PER SECOND
-	private double velocityY = 0;  
+	private double velocityY = 0; 
 	
 	private boolean isJumping = false;
 	private final double INITIAL_JUMP_VELOCITY = 250; //pixels / second
@@ -177,7 +177,8 @@ public class FireBoy implements DisplayableSprite {
 						this.getMaxX()  + deltaX, this.getMaxY() + deltaY, 
 						sprite.getMinX(),sprite.getMinY(), 
 						sprite.getMaxX(), sprite.getMaxY())) {
-					colliding = true;					
+					colliding = true;	
+					break;
 				}
 			} if (sprite instanceof Water || sprite instanceof Green) {
 				if (CollisionDetection.overlaps(this.getMinX() + deltaX, this.getMinY() + deltaY, 
@@ -197,7 +198,7 @@ public class FireBoy implements DisplayableSprite {
 		}		
 		if (onButton == true) {
 			universe.getDoor().openDoor(-1);
-		} else {
+		} else if (onButton == false) {
 			universe.getDoor().openDoor(1);
 		}
 		return colliding;
