@@ -17,7 +17,7 @@ public class FireBoy implements DisplayableSprite {
 	int timeJumping = 0;
 	int totalMove = 0;
 	
-	private double ACCCELERATION_X = 20;		//PIXELS PER SECOND PER SECOND
+	private double ACCCELERATION_X = 10;		//PIXELS PER SECOND PER SECOND
 	private double ACCCELERATION_Y = 600; 	//PIXELS PER SECOND PER SECOND
 	private double MAX_VELOCITY_X = 150;	//PIXELS PER SECOND
 	private double FRICTION_FACTOR_X = 0.95;
@@ -36,7 +36,7 @@ public class FireBoy implements DisplayableSprite {
 		this.centerX = centerX;
 		this.centerY = centerY;
 		collisionDetection = new CollisionDetection();
-		collisionDetection.setBounceFactorX(0.5);
+		collisionDetection.setBounceFactorX(0.1);
 		collisionDetection.setBounceFactorY(0);
 		bounce = new TwoDimensionBounce();
 		
