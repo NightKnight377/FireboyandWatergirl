@@ -15,6 +15,7 @@ public class Door implements DisplayableSprite {
 	private boolean dispose = false;
 	private int direction = 0;
 	private double originalY = 0;
+	private int distance = 0;
 	
 	public Door() {
 
@@ -100,14 +101,19 @@ public class Door implements DisplayableSprite {
 	public boolean getDispose() {
 		return dispose;
 	}
+	
+	public void distanceOpenDoor(int distance1) {
+		distance = distance1;
+	}
+	
 	public void openDoor(int direction1) {
 		direction = direction1;
 	}
 
 	public void update(Universe universe, KeyboardInput keyboard, long actual_delta_time) {
-		if (centerY < originalY && centerY > originalY - 200) {
+		if (centerY < originalY && centerY > originalY - distance) {
 			centerY += direction;
-		} else if (direction == 1 && centerY <= originalY - 200) {
+		} else if (direction == 1 && centerY <= originalY - distance) {
 			centerY += direction;
 		} else if (direction == -1 && centerY >= originalY) {
 			centerY += direction;
