@@ -4,24 +4,21 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class Door implements DisplayableSprite {
+public class FireboyFinish implements DisplayableSprite {
 
 	private static Image image;
 	private boolean visible = true;
-	private static double centerX = 0;
+	private double centerX = 0;
 	private double centerY = 0;
 	private double width = 50;
 	private double height = 50;
 	private boolean dispose = false;
-	private int direction = 0;
-	private double originalY = 0;
-	private int distance = 0;
 	
-	public Door() {
+	public FireboyFinish() {
 
 		if (image == null) {
 			try {
-				image = ImageIO.read(new File("res/Door.png"));
+				image = ImageIO.read(new File("res/FireboyFinish.png"));
 				this.height = this.image.getHeight(null);
 				this.width = this.image.getWidth(null);
 			}
@@ -31,11 +28,11 @@ public class Door implements DisplayableSprite {
 		}		
 	}
 	
-	public Door(double minX, double minY, double maxX, double maxY, boolean visible) {
+	public FireboyFinish(double minX, double minY, double maxX, double maxY, boolean visible) {
 		
 		if (image == null && visible) {
 			try {
-				image = ImageIO.read(new File("res/Door.png"));
+				image = ImageIO.read(new File("res/FireboyFinish.png"));
 			}
 			catch (IOException e) {
 				e.printStackTrace();
@@ -47,7 +44,6 @@ public class Door implements DisplayableSprite {
 		this.width = maxX - minX;
 		this.height = maxY - minY;
 		this.visible = visible;
-		originalY = centerY;
 		
 	}
 	
@@ -92,32 +88,19 @@ public class Door implements DisplayableSprite {
 
 	public double getCenterX() {
 		return centerX;
-	}
+	};
 
 	public double getCenterY() {
 		return centerY;
-	}
+	};
+	
 	
 	public boolean getDispose() {
 		return dispose;
 	}
-	
-	public void distanceOpenDoor(int distance1) {
-		distance = distance1;
-	}
-	
-	public void openDoor(int direction1) {
-		direction = direction1;
-	}
 
 	public void update(Universe universe, KeyboardInput keyboard, long actual_delta_time) {
-		if (centerY < originalY && centerY > originalY - distance) {
-			centerY += direction;
-		} else if (direction == 1 && centerY <= originalY - distance) {
-			centerY += direction;
-		} else if (direction == -1 && centerY >= originalY) {
-			centerY += direction;
-		}
+			
 	}
 
 }

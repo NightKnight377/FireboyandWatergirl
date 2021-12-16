@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class Button implements DisplayableSprite {
+public class WatergirlFinish implements DisplayableSprite {
 
 	private static Image image;
 	private boolean visible = true;
@@ -14,12 +14,12 @@ public class Button implements DisplayableSprite {
 	private double height = 50;
 	private boolean dispose = false;
 	
-	public Button() {
+	public WatergirlFinish() {
 
 		if (image == null) {
 			try {
-				image = ImageIO.read(new File("res/Button.png"));
-				this.height = this.image.getHeight(null);;
+				image = ImageIO.read(new File("res/WatergirlFinish.png"));
+				this.height = this.image.getHeight(null);
 				this.width = this.image.getWidth(null);
 			}
 			catch (IOException e) {
@@ -28,11 +28,11 @@ public class Button implements DisplayableSprite {
 		}		
 	}
 	
-	public Button(double minX, double minY, double maxX, double maxY, boolean visible) {
+	public WatergirlFinish(double minX, double minY, double maxX, double maxY, boolean visible) {
 		
 		if (image == null && visible) {
 			try {
-				image = ImageIO.read(new File("res/Button.png"));
+				image = ImageIO.read(new File("res/WatergirlFinish.png"));
 			}
 			catch (IOException e) {
 				e.printStackTrace();

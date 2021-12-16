@@ -21,7 +21,8 @@ public class WaterGirl implements DisplayableSprite {
 	private double MAX_VELOCITY_X = 150;	//PIXELS PER SECOND
 	private double FRICTION_FACTOR_X = 0.95;
 	private double velocityX = 0;        	//PIXELS PER SECOND
-	private double velocityY = 0;  
+	private double velocityY = 0; 
+	boolean finishing = false;
 	
 	private boolean isJumping = false;
 	private final double INITIAL_JUMP_VELOCITY = 250; //pixels / second
@@ -109,6 +110,10 @@ public class WaterGirl implements DisplayableSprite {
 		velocityY = value;
 	}
 	
+	public boolean getFinishing() {
+		return finishing;
+	}
+	
 	public boolean getDispose() {
 		return dispose;
 	}
@@ -169,9 +174,11 @@ public class WaterGirl implements DisplayableSprite {
 	private boolean checkCollisionWithBarrier(Universe universe, double deltaX, double deltaY) {
 
 		boolean colliding = false;
-		boolean onButton = false;
+		boolean onRedButton = false;
+		boolean onBlueButton = false;
+		finishing = false;
 		for (DisplayableSprite sprite : universe.getSprites()) {
-			if (sprite instanceof BarrierSprite || sprite instanceof Water || sprite instanceof Door) {
+			if (sprite instanceof BarrierSprite || sprite instanceof Water || sprite instanceof RedDoor || sprite instanceof BlueDoor) {
 				if (CollisionDetection.overlaps(this.getMinX() + deltaX, this.getMinY() + deltaY, 
 						this.getMaxX()  + deltaX, this.getMaxY() + deltaY, 
 						sprite.getMinX(),sprite.getMinY(), 
@@ -186,17 +193,34 @@ public class WaterGirl implements DisplayableSprite {
 						sprite.getMaxX(), sprite.getMaxY())) {
 					Main.frame.getUniverse().reset();
 				}
-			} if (sprite instanceof Button) {
+			} if (sprite instanceof RedButton) {
 				if (CollisionDetection.overlaps(this.getMinX() + deltaX, this.getMinY() + deltaY, 
 						this.getMaxX()  + deltaX, this.getMaxY() + deltaY, 
 						sprite.getMinX(),sprite.getMinY(), 
 						sprite.getMaxX(), sprite.getMaxY())) {
-					onButton = true;
+					onRedButton = true;
+				}
+			} if (sprite instanceof BlueButton) {
+				if (CollisionDetection.overlaps(this.getMinX() + deltaX, this.getMinY() + deltaY, 
+						this.getMaxX()  + deltaX, this.getMaxY() + deltaY, 
+						sprite.getMinX(),sprite.getMinY(), 
+						sprite.getMaxX(), sprite.getMaxY())) {
+					onBlueButton = true;
+				}
+			} if (sprite instanceof WatergirlFinish) {
+				if (CollisionDetection.overlaps(this.getMinX() + deltaX, this.getMinY() + deltaY, 
+						this.getMaxX()  + deltaX, this.getMaxY() + deltaY, 
+						sprite.getMinX(),sprite.getMinY(), 
+						sprite.getMaxX(), sprite.getMaxY())) {
+					finishing = true;
 				}
 			}
 		}
-		if (onButton == true) {
-			universe.getDoor().openDoor(-1);
+		if (onBlueButton == true) {
+			universe.getBlueDoor().openDoor(-1);
+		}
+		if (onRedButton == true) {
+			universe.getRedDoor().openDoor(-1);
 		}
 		return colliding;		
 	}

@@ -16,6 +16,7 @@ public class FireBoy implements DisplayableSprite {
 	boolean jumping = false;
 	int timeJumping = 0;
 	int totalMove = 0;
+	boolean finishing = false;
 	
 	private double ACCCELERATION_X = 10;		//PIXELS PER SECOND PER SECOND
 	private double ACCCELERATION_Y = 600; 	//PIXELS PER SECOND PER SECOND
@@ -110,6 +111,10 @@ public class FireBoy implements DisplayableSprite {
 		velocityY = value;
 	}
 	
+	public boolean getFinishing() {
+		return finishing;
+	}
+	
 	public boolean getDispose() {
 		return dispose;
 	}
@@ -170,9 +175,11 @@ public class FireBoy implements DisplayableSprite {
 	private boolean checkCollisionWithBarrier(Universe universe, double deltaX, double deltaY) {
 
 		boolean colliding = false;
-		boolean onButton = false;
+		boolean onRedButton = false;
+		boolean onBlueButton = false;
+		finishing = false;
 		for (DisplayableSprite sprite : universe.getSprites()) {
-			if (sprite instanceof BarrierSprite || sprite instanceof Lava || sprite instanceof Door) {
+			if (sprite instanceof BarrierSprite || sprite instanceof Lava || sprite instanceof RedDoor || sprite instanceof BlueDoor) {
 				if (CollisionDetection.overlaps(this.getMinX() + deltaX, this.getMinY() + deltaY, 
 						this.getMaxX()  + deltaX, this.getMaxY() + deltaY, 
 						sprite.getMinX(),sprite.getMinY(), 
@@ -187,19 +194,38 @@ public class FireBoy implements DisplayableSprite {
 						sprite.getMaxX(), sprite.getMaxY())) {
 					Main.frame.getUniverse().reset();					
 				}
-			} if (sprite instanceof Button) {
+			} if (sprite instanceof RedButton) {
 				if (CollisionDetection.overlaps(this.getMinX() + deltaX, this.getMinY() + deltaY, 
 						this.getMaxX()  + deltaX, this.getMaxY() + deltaY, 
 						sprite.getMinX(),sprite.getMinY(), 
 						sprite.getMaxX(), sprite.getMaxY())) {
-					onButton = true;
+					onRedButton = true;
+				}
+			} if (sprite instanceof BlueButton) {
+				if (CollisionDetection.overlaps(this.getMinX() + deltaX, this.getMinY() + deltaY, 
+						this.getMaxX()  + deltaX, this.getMaxY() + deltaY, 
+						sprite.getMinX(),sprite.getMinY(), 
+						sprite.getMaxX(), sprite.getMaxY())) {
+					onBlueButton = true;
+				}
+			} if (sprite instanceof FireboyFinish) {
+				if (CollisionDetection.overlaps(this.getMinX() + deltaX, this.getMinY() + deltaY, 
+						this.getMaxX()  + deltaX, this.getMaxY() + deltaY, 
+						sprite.getMinX(),sprite.getMinY(), 
+						sprite.getMaxX(), sprite.getMaxY())) {
+					finishing = true;
 				}
 			}
-		}		
-		if (onButton == true) {
-			universe.getDoor().openDoor(-1);
-		} else if (onButton == false) {
-			universe.getDoor().openDoor(1);
+		}	
+		if (onBlueButton == true) {
+			universe.getBlueDoor().openDoor(-1);
+		} else {
+			universe.getBlueDoor().openDoor(1);
+		}
+		if (onRedButton == true) {
+			universe.getRedDoor().openDoor(-1);
+		} else if (onRedButton == false) {
+			universe.getRedDoor().openDoor(1);
 		}
 		return colliding;
 	}
