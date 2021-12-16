@@ -217,14 +217,14 @@ public class FireBoy implements DisplayableSprite {
 				}
 			}
 		}	
-		if (onBlueButton == true) {
+		if (onBlueButton == true && universe.getBlueDoor() != null) {
 			universe.getBlueDoor().openDoor(-1);
-		} else {
+		} else if (onBlueButton == false && universe.getBlueDoor() != null){
 			universe.getBlueDoor().openDoor(1);
 		}
-		if (onRedButton == true) {
+		if (onRedButton == true && universe.getRedDoor() != null) {
 			universe.getRedDoor().openDoor(-1);
-		} else if (onRedButton == false) {
+		} else if (onRedButton == false && universe.getRedDoor() != null) {
 			universe.getRedDoor().openDoor(1);
 		}
 		return colliding;
