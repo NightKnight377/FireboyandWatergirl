@@ -145,7 +145,7 @@ public class Level1Universe implements Universe {
 	}
 
 	public String toString() {
-		return "ShellUniverse";
+		return "Level1Universe";
 	}
 
 	@Override
