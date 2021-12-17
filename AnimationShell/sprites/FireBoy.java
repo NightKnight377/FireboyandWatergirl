@@ -177,9 +177,11 @@ public class FireBoy implements DisplayableSprite {
 		boolean colliding = false;
 		boolean onRedButton = false;
 		boolean onBlueButton = false;
+		boolean onGreenButton = false;
+		boolean onYellowButton = false;
 		finishing = false;
 		for (DisplayableSprite sprite : universe.getSprites()) {
-			if (sprite instanceof BarrierSprite || sprite instanceof Lava || sprite instanceof RedDoor || sprite instanceof BlueDoor) {
+			if (sprite instanceof BarrierSprite || sprite instanceof Lava || sprite instanceof RedDoor || sprite instanceof BlueDoor || sprite instanceof GreenDoor || sprite instanceof YellowDoor) {
 				if (CollisionDetection.overlaps(this.getMinX() + deltaX, this.getMinY() + deltaY, 
 						this.getMaxX()  + deltaX, this.getMaxY() + deltaY, 
 						sprite.getMinX(),sprite.getMinY(), 
@@ -208,6 +210,20 @@ public class FireBoy implements DisplayableSprite {
 						sprite.getMaxX(), sprite.getMaxY())) {
 					onBlueButton = true;
 				}
+			} if (sprite instanceof GreenButton) {
+				if (CollisionDetection.overlaps(this.getMinX() + deltaX, this.getMinY() + deltaY, 
+						this.getMaxX()  + deltaX, this.getMaxY() + deltaY, 
+						sprite.getMinX(),sprite.getMinY(), 
+						sprite.getMaxX(), sprite.getMaxY())) {
+					onGreenButton = true;
+				}
+			} if (sprite instanceof YellowButton) {
+				if (CollisionDetection.overlaps(this.getMinX() + deltaX, this.getMinY() + deltaY, 
+						this.getMaxX()  + deltaX, this.getMaxY() + deltaY, 
+						sprite.getMinX(),sprite.getMinY(), 
+						sprite.getMaxX(), sprite.getMaxY())) {
+					onYellowButton = true;
+				}
 			} if (sprite instanceof FireboyFinish) {
 				if (CollisionDetection.overlaps(this.getMinX() + deltaX, this.getMinY() + deltaY, 
 						this.getMaxX()  + deltaX, this.getMaxY() + deltaY, 
@@ -226,6 +242,16 @@ public class FireBoy implements DisplayableSprite {
 			universe.getRedDoor().openDoor(-1);
 		} else if (onRedButton == false && universe.getRedDoor() != null) {
 			universe.getRedDoor().openDoor(1);
+		}
+		if (onYellowButton == true && universe.getYellowDoor() != null) {
+			universe.getYellowDoor().openDoor(-1);
+		} else if (onYellowButton == false && universe.getYellowDoor() != null) {
+			universe.getYellowDoor().openDoor(1);
+		}
+		if (onGreenButton == true && universe.getGreenDoor() != null) {
+			universe.getGreenDoor().openDoor(-1);
+		} else if (onGreenButton == false && universe.getGreenDoor() != null) {
+			universe.getGreenDoor().openDoor(1);
 		}
 		return colliding;
 	}

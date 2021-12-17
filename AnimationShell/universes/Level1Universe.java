@@ -10,6 +10,8 @@ public class Level1Universe implements Universe {
 	private ArrayList<DisplayableSprite> barriers = new ArrayList<DisplayableSprite>();
 	private RedDoor redDoor;
 	private BlueDoor blueDoor;
+	private YellowDoor yellowDoor;
+	private GreenDoor greenDoor;
 	private FireboyFinish FireboyFinish;
 	private WatergirlFinish WatergirlFinish;
 
@@ -166,5 +168,13 @@ public class Level1Universe implements Universe {
 	
 	public BlueDoor getBlueDoor() {
 		return blueDoor;
+	}
+
+	public YellowDoor getYellowDoor() {
+		return yellowDoor;
+	}
+
+	public GreenDoor getGreenDoor() {
+		return greenDoor;
 	}
 }

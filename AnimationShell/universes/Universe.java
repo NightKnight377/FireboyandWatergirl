@@ -13,6 +13,8 @@ public interface Universe {
 	public double getYCenter();
 	public RedDoor getRedDoor();
 	public BlueDoor getBlueDoor();
+	public YellowDoor getYellowDoor();
+	public GreenDoor getGreenDoor();
 	
 	public void setXCenter(double xCenter);
 	public void setYCenter(double yCenter);
