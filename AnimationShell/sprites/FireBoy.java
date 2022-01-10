@@ -194,7 +194,7 @@ public class FireBoy implements DisplayableSprite {
 						this.getMaxX()  + deltaX, this.getMaxY() + deltaY, 
 						sprite.getMinX(),sprite.getMinY(), 
 						sprite.getMaxX(), sprite.getMaxY())) {
-					Main.frame.getUniverse().reset();					
+					universe.reset();					
 				}
 			} if (sprite instanceof RedButton) {
 				if (CollisionDetection.overlaps(this.getMinX() + deltaX, this.getMinY() + deltaY, 
