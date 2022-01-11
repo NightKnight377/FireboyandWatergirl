@@ -179,14 +179,16 @@ public class FireBoy implements DisplayableSprite {
 		boolean onBlueButton = false;
 		boolean onGreenButton = false;
 		boolean onYellowButton = false;
+		boolean onPurpleButton = false;
 		finishing = false;
+		
 		for (DisplayableSprite sprite : universe.getSprites()) {
 			if (sprite instanceof BarrierSprite || sprite instanceof Lava || sprite instanceof RedDoor || sprite instanceof BlueDoor || sprite instanceof GreenDoor || sprite instanceof YellowDoor) {
 				if (CollisionDetection.overlaps(this.getMinX() + deltaX, this.getMinY() + deltaY, 
 						this.getMaxX()  + deltaX, this.getMaxY() + deltaY, 
 						sprite.getMinX(),sprite.getMinY(), 
 						sprite.getMaxX(), sprite.getMaxY())) {
-					colliding = true;	
+					colliding = true;
 					break;
 				}
 			} if (sprite instanceof Water || sprite instanceof Green) {
@@ -231,7 +233,14 @@ public class FireBoy implements DisplayableSprite {
 						sprite.getMaxX(), sprite.getMaxY())) {
 					finishing = true;
 				}
-			}
+			} if (sprite instanceof PurpleButton) {
+				if (CollisionDetection.overlaps(this.getMinX() + deltaX, this.getMinY() + deltaY, 
+						this.getMaxX()  + deltaX, this.getMaxY() + deltaY, 
+						sprite.getMinX(),sprite.getMinY(), 
+						sprite.getMaxX(), sprite.getMaxY())) {
+					onPurpleButton = true;
+				}
+			} 
 		}	
 		if (onBlueButton == true && universe.getBlueDoor() != null) {
 			universe.getBlueDoor().openDoor(-1);
@@ -252,6 +261,11 @@ public class FireBoy implements DisplayableSprite {
 			universe.getGreenDoor().openDoor(-1);
 		} else if (onGreenButton == false && universe.getGreenDoor() != null) {
 			universe.getGreenDoor().openDoor(1);
+		}
+		if (onPurpleButton == true && universe.getPurpleDoor() != null) {
+			universe.getPurpleDoor().openDoor(-1);
+		} else if (onPurpleButton == false && universe.getPurpleDoor() != null) {
+			universe.getPurpleDoor().openDoor(1);
 		}
 		return colliding;
 	}

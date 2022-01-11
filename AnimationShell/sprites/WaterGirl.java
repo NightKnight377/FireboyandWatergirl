@@ -239,10 +239,10 @@ public class WaterGirl implements DisplayableSprite {
 			universe.getRedDoor().openDoor(-1);
 		}
 		if (onYellowButton == true && universe.getYellowDoor() != null) {
-			universe.getRedDoor().openDoor(-1);
+			universe.getYellowDoor().openDoor(-1);
 		}
 		if (onGreenButton == true && universe.getYellowDoor() != null) {
-			universe.getRedDoor().openDoor(-1);
+			universe.getGreenDoor().openDoor(-1);
 		}
 		return colliding;		
 	}

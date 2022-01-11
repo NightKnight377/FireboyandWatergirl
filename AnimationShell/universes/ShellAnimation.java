@@ -19,6 +19,8 @@ public class ShellAnimation implements Animation {
 			return new Level1Universe();
 		} else if (universeCount == 2) {
 			return new Level2Universe();
+		} else if (universeCount == 3) {
+			return new Level3Universe();
 		} else {
 			return null;
 		}
