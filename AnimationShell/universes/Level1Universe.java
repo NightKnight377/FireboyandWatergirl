@@ -13,6 +13,7 @@ public class Level1Universe implements Universe {
 	private YellowDoor yellowDoor;
 	private GreenDoor greenDoor;
 	private PurpleDoor purpleDoor;
+	private PurpleDoor purpleDoor1;
 	private FireboyFinish FireboyFinish;
 	private WatergirlFinish WatergirlFinish;
 
@@ -181,5 +182,9 @@ public class Level1Universe implements Universe {
 	
 	public PurpleDoor getPurpleDoor() {
 		return purpleDoor;
+	}
+	
+	public PurpleDoor getPurpleDoor1() {
+		return purpleDoor1;
 	}
 }

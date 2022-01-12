@@ -14,7 +14,7 @@ public class PurpleDoor implements DisplayableSprite {
 	private double height = 50;
 	private boolean dispose = false;
 	private int direction = 0;
-	private double originalY = 0;
+	private double originalX = 0;
 	private int distance = 0;
 	
 	public PurpleDoor() {
@@ -47,7 +47,7 @@ public class PurpleDoor implements DisplayableSprite {
 		this.width = maxX - minX;
 		this.height = maxY - minY;
 		this.visible = visible;
-		originalY = centerY;
+		originalX = centerX;
 		
 	}
 	
@@ -111,12 +111,12 @@ public class PurpleDoor implements DisplayableSprite {
 	}
 
 	public void update(Universe universe, KeyboardInput keyboard, long actual_delta_time) {
-		if (centerY < originalY && centerY > originalY - distance) {
-			centerY += direction;
-		} else if (direction == 1 && centerY <= originalY - distance) {
-			centerY += direction;
-		} else if (direction == -1 && centerY >= originalY) {
-			centerY += direction;
+		if (centerX < originalX && centerX > originalX - distance) {
+			centerX += direction;
+		} else if (direction == 1 && centerX <= originalX - distance) {
+			centerX += direction;
+		} else if (direction == -2 && centerX >= originalX) {
+			centerX += direction;
 		}
 	}
 

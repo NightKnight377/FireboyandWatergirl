@@ -13,6 +13,7 @@ public class Level3Universe implements Universe {
 	private YellowDoor yellowDoor;
 	private GreenDoor greenDoor;
 	private PurpleDoor purpleDoor;
+	private PurpleDoor purpleDoor1;
 	private FireboyFinish FireboyFinish;
 	private WatergirlFinish WatergirlFinish;
 
@@ -27,21 +28,31 @@ public class Level3Universe implements Universe {
 		
 		//top
 		barriers.add(new BarrierSprite(AnimationFrame.SCREEN_WIDTH / -2,AnimationFrame.SCREEN_HEIGHT / -2, AnimationFrame.SCREEN_WIDTH / 2, AnimationFrame.SCREEN_HEIGHT / -2 + 16, true));
-		//bottom
-		barriers.add(new BarrierSprite(0,359,500, 375, true));
 		//left
 		barriers.add(new BarrierSprite(AnimationFrame.SCREEN_WIDTH / -2,AnimationFrame.SCREEN_HEIGHT / -2, AnimationFrame.SCREEN_WIDTH / -2 + 16, AnimationFrame.SCREEN_HEIGHT / 2, true));
 		//right
 		barriers.add(new BarrierSprite(AnimationFrame.SCREEN_WIDTH / 2 - 16,AnimationFrame.SCREEN_HEIGHT / -2, AnimationFrame.SCREEN_WIDTH / 2, AnimationFrame.SCREEN_HEIGHT / 2, true));
 		
-		barriers.add(new BarrierSprite(0,375,0+16, -200, true));
+		barriers.add(new BarrierSprite(0,-140,0+16, 375, true));
+		barriers.add(new BarrierSprite(-500,300,-350, 300+16, true));
+		barriers.add(new BarrierSprite(-350,100,-250, 100+16, true));
+		barriers.add(new BarrierSprite(-50,150,-0, 150+16, true));
+		barriers.add(new BarrierSprite(-500,0,-350, 0+16, true));
+		barriers.add(new BarrierSprite(-120,-140,0, -140+16, true));
+		//jumps with random barriers for watergirl, finish will be at the bottom of a tube with death at the bottom
 		
 		//doors
-		
+		purpleDoor = new PurpleDoor(-100,250,-25,250+16, true);
+		barriers.add(purpleDoor);
+		purpleDoor.distanceOpenDoor(75);
+		purpleDoor1 = new PurpleDoor(-100,-50,-25,-50+16, true);
+		barriers.add(purpleDoor1);
+		purpleDoor1.distanceOpenDoor(75);
 		//Buttons
-		
+		sprites.add(new PurpleButton(-275, 180, -175, 180-30, true));
+		sprites.add(new PurpleButton(-275, -120, -175, -120-30, true));
 		//Green
-		barriers.add(new Green(-500,359,0,375,true));
+		barriers.add(new Green(-500,359,500,375,true));
 		
 		sprites.addAll(barriers);
 
@@ -148,5 +159,9 @@ public class Level3Universe implements Universe {
 	
 	public PurpleDoor getPurpleDoor() {
 		return purpleDoor;
+	}
+	
+	public PurpleDoor getPurpleDoor1() {
+		return purpleDoor1;
 	}
 }

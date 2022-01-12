@@ -178,6 +178,7 @@ public class WaterGirl implements DisplayableSprite {
 		boolean onBlueButton = false;
 		boolean onGreenButton = false;
 		boolean onYellowButton = false;
+		boolean onPurpleButton = false;
 		finishing = false;
 		for (DisplayableSprite sprite : universe.getSprites()) {
 			if (sprite instanceof BarrierSprite || sprite instanceof Water || sprite instanceof RedDoor || sprite instanceof BlueDoor || sprite instanceof GreenDoor || sprite instanceof YellowDoor) {
@@ -230,7 +231,14 @@ public class WaterGirl implements DisplayableSprite {
 						sprite.getMaxX(), sprite.getMaxY())) {
 					finishing = true;
 				}
-			}
+			} if (sprite instanceof PurpleButton) {
+				if (CollisionDetection.overlaps(this.getMinX() + deltaX, this.getMinY() + deltaY, 
+						this.getMaxX()  + deltaX, this.getMaxY() + deltaY, 
+						sprite.getMinX(),sprite.getMinY(), 
+						sprite.getMaxX(), sprite.getMaxY())) {
+					onPurpleButton = true;
+				}
+			} 
 		}
 		if (onBlueButton == true && universe.getBlueDoor() != null) {
 			universe.getBlueDoor().openDoor(-1);
@@ -243,6 +251,10 @@ public class WaterGirl implements DisplayableSprite {
 		}
 		if (onGreenButton == true && universe.getYellowDoor() != null) {
 			universe.getGreenDoor().openDoor(-1);
+		}
+		if (onPurpleButton == true && universe.getPurpleDoor() != null) {
+			universe.getPurpleDoor().openDoor(-2);
+			universe.getPurpleDoor1().openDoor(-2);
 		}
 		return colliding;		
 	}

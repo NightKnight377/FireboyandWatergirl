@@ -16,6 +16,7 @@ public interface Universe {
 	public YellowDoor getYellowDoor();
 	public GreenDoor getGreenDoor();
 	public PurpleDoor getPurpleDoor();
+	public PurpleDoor getPurpleDoor1();
 	
 	public void setXCenter(double xCenter);
 	public void setYCenter(double yCenter);
@@ -32,6 +33,7 @@ public interface Universe {
 	
 	public void reset();
 	public void update(KeyboardInput keyboard, long actual_delta_time);
+
 
 	
     

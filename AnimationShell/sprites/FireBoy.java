@@ -183,7 +183,7 @@ public class FireBoy implements DisplayableSprite {
 		finishing = false;
 		
 		for (DisplayableSprite sprite : universe.getSprites()) {
-			if (sprite instanceof BarrierSprite || sprite instanceof Lava || sprite instanceof RedDoor || sprite instanceof BlueDoor || sprite instanceof GreenDoor || sprite instanceof YellowDoor) {
+			if (sprite instanceof BarrierSprite || sprite instanceof Lava || sprite instanceof RedDoor || sprite instanceof BlueDoor || sprite instanceof GreenDoor || sprite instanceof YellowDoor || sprite instanceof PurpleDoor) {
 				if (CollisionDetection.overlaps(this.getMinX() + deltaX, this.getMinY() + deltaY, 
 						this.getMaxX()  + deltaX, this.getMaxY() + deltaY, 
 						sprite.getMinX(),sprite.getMinY(), 
@@ -263,9 +263,11 @@ public class FireBoy implements DisplayableSprite {
 			universe.getGreenDoor().openDoor(1);
 		}
 		if (onPurpleButton == true && universe.getPurpleDoor() != null) {
-			universe.getPurpleDoor().openDoor(-1);
+			universe.getPurpleDoor().openDoor(-2);
+			universe.getPurpleDoor1().openDoor(-2);
 		} else if (onPurpleButton == false && universe.getPurpleDoor() != null) {
 			universe.getPurpleDoor().openDoor(1);
+			universe.getPurpleDoor1().openDoor(1);
 		}
 		return colliding;
 	}
