@@ -181,7 +181,7 @@ public class WaterGirl implements DisplayableSprite {
 		boolean onPurpleButton = false;
 		finishing = false;
 		for (DisplayableSprite sprite : universe.getSprites()) {
-			if (sprite instanceof BarrierSprite || sprite instanceof Water || sprite instanceof RedDoor || sprite instanceof BlueDoor || sprite instanceof GreenDoor || sprite instanceof YellowDoor) {
+			if (sprite instanceof BarrierSprite || sprite instanceof Water || sprite instanceof RedDoor || sprite instanceof BlueDoor || sprite instanceof GreenDoor || sprite instanceof YellowDoor || sprite instanceof PurpleDoor) {
 				if (CollisionDetection.overlaps(this.getMinX() + deltaX, this.getMinY() + deltaY, 
 						this.getMaxX()  + deltaX, this.getMaxY() + deltaY, 
 						sprite.getMinX(),sprite.getMinY(), 
