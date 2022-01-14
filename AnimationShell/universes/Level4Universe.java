@@ -23,7 +23,7 @@ public class Level4Universe implements Universe {
 		this.setYCenter(0);
 		player1 = new FireBoy(-450,250);
 		sprites.add(player1);
-		player2 = new WaterGirl(450,250);
+		player2 = new WaterGirl(-450,250);
 		sprites.add(player2);
 		
 		//top
@@ -33,11 +33,40 @@ public class Level4Universe implements Universe {
 		//right
 		barriers.add(new BarrierSprite(AnimationFrame.SCREEN_WIDTH / 2 - 16,AnimationFrame.SCREEN_HEIGHT / -2, AnimationFrame.SCREEN_WIDTH / 2, AnimationFrame.SCREEN_HEIGHT / 2, true));
 		
-		barriers.add(new BarrierSprite(-500,359,500, 375, true));
+		barriers.add(new BarrierSprite(-500,359,-400, 375, true));
+		barriers.add(new BarrierSprite(200,359,500, 375, true));
+		barriers.add(new BarrierSprite(0,159,400, 175, true));
+		barriers.add(new BarrierSprite(-125,309,-75, 325, true));
+		barriers.add(new BarrierSprite(450,259,500, 275, true));
+		barriers.add(new BarrierSprite(-400,59,100, 75, true));
+		barriers.add(new BarrierSprite(200,59,500, 75, true));
+		barriers.add(new BarrierSprite(-400,-140,-400+16,59, true));
+		barriers.add(new BarrierSprite(-400,-140,-300,-140+16, true));
+		barriers.add(new BarrierSprite(-450,-45,-400,-45+16, true));
+		barriers.add(new BarrierSprite(-500,59,-450,59+16, true));
+		
+		//Lava
+		barriers.add(new Lava(-400,259,-250, 275, true));
+		barriers.add(new Lava(0,359,200, 375, true));
+		barriers.add(new Lava(-500,159,0, 175, true));
+		
+		//Water
+		barriers.add(new Water(-400,359,-200, 375, true));
+		barriers.add(new Water(50,259,200, 275, true));
+		
+		//Green
+		barriers.add(new Green(-200,359,0, 375, true));
+		
+		//Buttons
+		sprites.add(new RedButton(300,145,350, 145+16, true));
+		sprites.add(new YellowButton(-375,49,-325,49+10,true));
+		
+		//Doors
+		barriers.add(new RedDoor());
 		
 		//Finish
-		sprites.add(new FireboyFinish(10,359-80,10+60,359,true));
-		sprites.add(new WatergirlFinish(70,359-80,70+60,359,true));
+		sprites.add(new FireboyFinish(10,-359,10+60,-359+80,true));
+		sprites.add(new WatergirlFinish(70,-359,70+60,-359+80,true));
 		
 		sprites.addAll(barriers);
 
@@ -120,7 +149,7 @@ public class Level4Universe implements Universe {
 		((FireBoy) player1).setCenterY(250);
 		((FireBoy) player1).setVelocityY(0);
 		((FireBoy) player1).setVelocityX(0);
-		((WaterGirl) player2).setCenterX(450);
+		((WaterGirl) player2).setCenterX(-450);
 		((WaterGirl) player2).setCenterY(250);
 		((WaterGirl) player2).setVelocityY(0);
 		((WaterGirl) player2).setVelocityX(0);

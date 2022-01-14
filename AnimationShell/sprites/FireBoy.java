@@ -180,6 +180,7 @@ public class FireBoy implements DisplayableSprite {
 		boolean onGreenButton = false;
 		boolean onYellowButton = false;
 		boolean onPurpleButton = false;
+		boolean BlueSwitchon = false;
 		finishing = false;
 		
 		for (DisplayableSprite sprite : universe.getSprites()) {
@@ -240,7 +241,7 @@ public class FireBoy implements DisplayableSprite {
 						sprite.getMaxX(), sprite.getMaxY())) {
 					onPurpleButton = true;
 				}
-			} 
+			}
 		}	
 		if (onBlueButton == true && universe.getBlueDoor() != null) {
 			universe.getBlueDoor().openDoor(-1);
