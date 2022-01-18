@@ -44,6 +44,9 @@ public class Level4Universe implements Universe {
 		barriers.add(new BarrierSprite(-400,-140,-300,-140+16, true));
 		barriers.add(new BarrierSprite(-450,-45,-400,-45+16, true));
 		barriers.add(new BarrierSprite(-500,59,-450,59+16, true));
+		barriers.add(new BarrierSprite(-500,-280,-125,-280+16, true));
+		barriers.add(new BarrierSprite(450,-30,500,-30+16, true));
+		barriers.add(new BarrierSprite(300,-120,350,-120+16, true));
 		
 		//Lava
 		barriers.add(new Lava(-400,259,-250, 275, true));
@@ -58,15 +61,22 @@ public class Level4Universe implements Universe {
 		barriers.add(new Green(-200,359,0, 375, true));
 		
 		//Buttons
-		sprites.add(new RedButton(300,145,350, 145+16, true));
+		sprites.add(new BlueButton(300,145,350, 145+16, true));
+		sprites.add(new BlueButton(-275,-296,-225,-296+16, true));
 		sprites.add(new YellowButton(-375,49,-325,49+10,true));
+		sprites.add(new YellowButton(-200,-296,-150,-296+16,true));
 		
 		//Doors
-		barriers.add(new RedDoor());
+		blueDoor = new BlueDoor(100,-200,200,-200+16,true);
+		barriers.add(blueDoor);
+		blueDoor.distanceOpenDoor(100);
+		yellowDoor = new YellowDoor(100,59,200,59+16,true);
+		barriers.add(yellowDoor);
+		yellowDoor.distanceOpenDoor(100);
 		
 		//Finish
-		sprites.add(new FireboyFinish(10,-359,10+60,-359+80,true));
-		sprites.add(new WatergirlFinish(70,-359,70+60,-359+80,true));
+		sprites.add(new FireboyFinish(-450,-359,-450+60,-359+80,true));
+		sprites.add(new WatergirlFinish(-350,-359,-350+60,-359+80,true));
 		
 		sprites.addAll(barriers);
 
