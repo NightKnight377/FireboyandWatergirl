@@ -21,9 +21,9 @@ public class Level4Universe implements Universe {
 
 		this.setXCenter(0);
 		this.setYCenter(0);
-		player1 = new FireBoy(-450,250);
+		player1 = new FireBoy(-450,300);
 		sprites.add(player1);
-		player2 = new WaterGirl(-450,250);
+		player2 = new WaterGirl(-450,300);
 		sprites.add(player2);
 		
 		//top
@@ -63,7 +63,7 @@ public class Level4Universe implements Universe {
 		//Buttons
 		sprites.add(new BlueButton(300,145,350, 145+16, true));
 		sprites.add(new BlueButton(-275,-296,-225,-296+16, true));
-		sprites.add(new YellowButton(-375,49,-325,49+10,true));
+		sprites.add(new YellowButton(-375,-150,-325,-150+10,true));
 		sprites.add(new YellowButton(-200,-296,-150,-296+16,true));
 		
 		//Doors
@@ -156,11 +156,11 @@ public class Level4Universe implements Universe {
 	@Override
 	public void reset() {
 		((FireBoy) player1).setCenterX(-450);
-		((FireBoy) player1).setCenterY(250);
+		((FireBoy) player1).setCenterY(300);
 		((FireBoy) player1).setVelocityY(0);
 		((FireBoy) player1).setVelocityX(0);
 		((WaterGirl) player2).setCenterX(-450);
-		((WaterGirl) player2).setCenterY(250);
+		((WaterGirl) player2).setCenterY(300);
 		((WaterGirl) player2).setVelocityY(0);
 		((WaterGirl) player2).setVelocityX(0);
 	}
